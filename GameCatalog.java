@@ -3,6 +3,8 @@ import org.json.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameCatalog {
 
@@ -24,16 +26,21 @@ public class GameCatalog {
 
     public void saveGames() {
         try {
-            Files.write(Paths.get("games.json"), games.toString(4).getBytes()); 
+            Files.write(Paths.get("games.json"), games.toString(4).getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     public void addGame(JSONObject game) {
         games.put(game);
-        saveGames();  
+        saveGames();
     }
 
-    
+    public List<Game> filterGamesByTags(List<String> selectedTags) {
+        return games.toList().stream()
+            .map(obj -> Game.fromJSONObject(new JSONObject((java.util.Map<?, ?>) obj)))
+            .filter(game -> game.getTags().stream().anyMatch(selectedTags::contains))
+            .collect(Collectors.toList());
+    }
 }
