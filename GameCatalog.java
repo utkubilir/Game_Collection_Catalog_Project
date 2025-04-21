@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class GameCatalog {
 
@@ -43,4 +44,34 @@ public class GameCatalog {
             .filter(game -> game.getTags().stream().anyMatch(selectedTags::contains))
             .collect(Collectors.toList());
     }
+    public List<Game> sortGames(String criteria, boolean ascending) {
+    List<Game> gameList = games.toList().stream()
+        .map(obj -> Game.fromJSONObject(new JSONObject((java.util.Map<?, ?>) obj)))
+        .collect(Collectors.toList());
+
+    Comparator<Game> comparator;
+
+    switch (criteria.toLowerCase()) {
+        case "title":
+            comparator = Comparator.comparing(Game::getTitle, String.CASE_INSENSITIVE_ORDER);
+            break;
+        case "releaseyear":
+            comparator = Comparator.comparingInt(Game::getReleaseYear);
+            break;
+        case "playtime":
+            comparator = Comparator.comparingInt(Game::getPlaytime);
+            break;
+        default:
+            comparator = Comparator.comparing(Game::getTitle, String.CASE_INSENSITIVE_ORDER);
+            break;
+    }
+
+    if (!ascending) {
+        comparator = comparator.reversed();
+    }
+
+    gameList.sort(comparator);
+    return gameList;
+}
+    
 }
