@@ -53,6 +53,46 @@ public class Game {
     public int getPlaytime() {
     return playtime;
     }
+      public String getDeveloper() {
+        return developer;
+    }
+
+    public List<String> getGenre() {
+        return genre;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public List<String> getPlatforms() {
+        return platforms;
+    }
+
+    public List<String> getTranslators() {
+        return translators;
+    }
+
+    public String getSteamid() {
+        return steamid;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+    
 
     public static Game fromJSONObject(JSONObject obj) {
         List<String> genre = jsonArrayToList(obj.optJSONArray("genre"));
@@ -82,4 +122,5 @@ public class Game {
         if (arr == null) return null;
         return arr.toList().stream().map(Object::toString).collect(Collectors.toList());
     }
+
 }
