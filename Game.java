@@ -3,6 +3,7 @@ import java.util.stream.Collectors;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+    //Created a class named game to carry all of the informations of the games as described in the project description
 public class Game {
     private String title;
     private List<String> genre;
@@ -19,6 +20,7 @@ public class Game {
     private List<String> tags;
     private String coverImage;
 
+    // we had given default names for the null or empty values because of the requirement
     public Game(String title, List<String> genre, String developer, String publisher, List<String> platforms,
                 List<String> translators, String steamid, int releaseYear, int playtime, String format,
                 String language, String rating, List<String> tags, String coverImage) {
@@ -46,14 +48,16 @@ public class Game {
     public List<String> getTags() {
         return tags;
     }
+
     public int getReleaseYear() {
-    return releaseYear;
+        return releaseYear;
     }
 
     public int getPlaytime() {
-    return playtime;
+        return playtime;
     }
-      public String getDeveloper() {
+
+    public String getDeveloper() {
         return developer;
     }
 
@@ -92,8 +96,8 @@ public class Game {
     public String getCoverImage() {
         return coverImage;
     }
-    
 
+    //changes the read fson files games to game object that we created
     public static Game fromJSONObject(JSONObject obj) {
         List<String> genre = jsonArrayToList(obj.optJSONArray("genre"));
         List<String> platforms = jsonArrayToList(obj.optJSONArray("platforms"));
@@ -101,25 +105,46 @@ public class Game {
         List<String> tags = jsonArrayToList(obj.optJSONArray("tags"));
 
         return new Game(
-            obj.optString("title", null),
-            genre,
-            obj.optString("developer", null),
-            obj.optString("publisher", null),
-            platforms,
-            translators,
-            obj.optString("steamid", null),
-            obj.optInt("releaseYear", 0),
-            obj.optInt("playtime", 0),
-            obj.optString("format", null),
-            obj.optString("language", null),
-            obj.optString("rating", null),
-            tags,
-            obj.optString("coverImage", null)
+                obj.optString("title", null),
+                genre,
+                obj.optString("developer", null),
+                obj.optString("publisher", null),
+                platforms,
+                translators,
+                obj.optString("steamid", null),
+                obj.optInt("releaseYear", 0),
+                obj.optInt("playtime", 0),
+                obj.optString("format", null),
+                obj.optString("language", null),
+                obj.optString("rating", null),
+                tags,
+                obj.optString("coverImage", null)
         );
     }
 
-    public static List<String> jsonArrayToList(JSONArray arr) {
-        if (arr == null) return null;
+    //changes game object to be able to write to the json file
+    public JSONObject toJSONObject() {
+        JSONObject obj = new JSONObject();
+        obj.put("title", title);
+        obj.put("genre", genre);
+        obj.put("developer", developer);
+        obj.put("publisher", publisher);
+        obj.put("platforms", platforms);
+        obj.put("translators", translators);
+        obj.put("steamid", steamid);
+        obj.put("releaseYear", releaseYear);
+        obj.put("playtime", playtime);
+        obj.put("format", format);
+        obj.put("language", language);
+        obj.put("rating", rating);
+        obj.put("tags", tags);
+        obj.put("coverImage", coverImage);
+        return obj;
+    }
+
+    //changes the jsonarray to java list
+    private static List<String> jsonArrayToList(JSONArray arr) {
+        if (arr == null) return List.of();
         return arr.toList().stream().map(Object::toString).collect(Collectors.toList());
     }
 

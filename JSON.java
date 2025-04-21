@@ -1,50 +1,110 @@
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import java.io.*;
-import java.lang.reflect.Type;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class JsonHandler {
 
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final String DEFAULT_FILE_PATH = "games.json";
 
     // Read JSON file and convert it to a List of Maps
+    // reads JSON file and return list of game maps
     public List<Map<String, Object>> readJsonFile(String filePath) {
-        try (Reader reader = new FileReader(filePath)) {
-            Type listType = new TypeToken<List<Map<String, Object>>>() {}.getType();
-            return gson.fromJson(reader, listType);
+        List<Map<String, Object>> gameList = new ArrayList<>();
+
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            JSONArray jsonArray = new JSONArray(content);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject gameJson = jsonArray.getJSONObject(i);
+                Map<String, Object> gameMap = new HashMap<>();
+
+                for (String key : gameJson.keySet()) {
+                    gameMap.put(key, gameJson.get(key));
+                }
+
+                gameList.add(gameMap);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>();
         }
+
+        return gameList;
     }
 
     // Write a List of Maps to a JSON file
+    // writes list of game maps to JSON file
     public void writeJsonFile(String filePath, List<Map<String, Object>> gamesList) {
-        try (Writer writer = new FileWriter(filePath)) {
-            gson.toJson(gamesList, writer);
+        JSONArray jsonArray = new JSONArray();
+
+        for (Map<String, Object> game : gamesList) {
+            JSONObject gameJson = new JSONObject(game);
+            jsonArray.put(gameJson);
+        }
+
+        try {
+            Files.write(Paths.get(filePath), jsonArray.toString(4).getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        JsonHandler handler = new JsonHandler();
-        String filePath = "games.json";
+        GameCatalog catalog = new GameCatalog();
 
-        // Read JSON
-        List<Map<String, Object>> games = handler.readJsonFile(filePath);
-        System.out.println("Games List: " + games);
+        // Show all loaded games
+        System.out.println("=== All Games from JSON ===");
+        List<Game> allGames = catalog.sortGames("title", true);
+        for (Game game : allGames) {
+            System.out.println("- " + game.getTitle()
+                    + " | Developer: " + game.getDeveloper()
+                    + " | Release: " + game.getReleaseYear());
+        }
 
-        // Modify Data (Example: Add a new game)
-        Map<String, Object> newGame = new HashMap<>();
-        newGame.put("title", "New Game");
-        newGame.put("developer", "Indie Studio");
-        newGame.put("release_year", 2025);
-        games.add(newGame);
+        // Create a new game to test addition
+        Game testGame = new Game(
+                "Deep Horizon",
+                List.of("Sci-Fi", "RPG"),
+                "Nova Studios",
+                "DeepSpace Inc.",
+                List.of("PC", "PS5"),
+                List.of("Translator X", "Translator Y"),
+                "987654",
+                2026,
+                60,
+                "Digital",
+                "English",
+                "Teen",
+                List.of("Space", "Exploration", "Story Rich"),
+                "deephorizon.jpg"
+        );
 
-        // Write back to JSON
-        handler.writeJsonFile(filePath, games);
-        System.out.println("Updated JSON saved.");
+        // Add and save the new game
+        catalog.addGame(testGame.toJSONObject());
+        System.out.println("\nNew game 'Deep Horizon' added.");
+
+        // Filter games with the tag "Story Rich"
+        List<Game> filteredByTag = catalog.filterGamesByTags(List.of("Story Rich"));
+        System.out.println("\n=== Games tagged with 'Story Rich' ===");
+        for (Game g : filteredByTag) {
+            System.out.println("- " + g.getTitle());
+        }
+
+        // Filter games by a developer
+        List<Game> byDeveloper = catalog.filterGamesByDeveloper("Nova Studios");
+        System.out.println("\n=== Games by 'Nova Studios' ===");
+        for (Game g : byDeveloper) {
+            System.out.println("- " + g.getTitle());
+        }
+
+        // Export filtered list
+        catalog.exportSelectedGames(byDeveloper);
+        System.out.println("\nExported 'Nova Studios' games to selected_games.json.");
     }
 }
+
