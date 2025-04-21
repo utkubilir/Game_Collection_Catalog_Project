@@ -3,6 +3,7 @@ import org.json.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Comparator;
@@ -73,5 +74,12 @@ public class GameCatalog {
     gameList.sort(comparator);
     return gameList;
 }
+    public List<Game> filterGamesByDeveloper(String developer) {
+    return games.toList().stream()
+        .map(obj -> Game.fromJSONObject(new JSONObject((java.util.Map<?, ?>) obj)))
+        .filter(game -> game.getDeveloper().equalsIgnoreCase(developer))
+        .collect(Collectors.toList());
+    }
     
+       
 }
