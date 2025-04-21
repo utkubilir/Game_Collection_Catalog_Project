@@ -80,6 +80,21 @@ public class GameCatalog {
         .filter(game -> game.getDeveloper().equalsIgnoreCase(developer))
         .collect(Collectors.toList());
     }
+    public void exportSelectedGames(List<Game> selectedGames) {
+    JSONArray selectedJsonGames = new JSONArray();
+    for (Game game : selectedGames) {
+        JSONObject gameJson = new JSONObject();
+        gameJson.put("title", game.getTitle());
+        gameJson.put("developer", game.getDeveloper());
+        // Diğer alanları ekleyin
+        selectedJsonGames.put(gameJson);
+    }
+    try {
+        Files.write(Paths.get("selected_games.json"), selectedJsonGames.toString(4).getBytes());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     
        
 }
