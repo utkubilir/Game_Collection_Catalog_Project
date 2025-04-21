@@ -46,8 +46,14 @@ public class Game {
     public List<String> getTags() {
         return tags;
     }
+    public int getReleaseYear() {
+    return releaseYear;
+    }
 
-    // JSON'dan Game nesnesi üretmek için helper metot
+    public int getPlaytime() {
+    return playtime;
+    }
+
     public static Game fromJSONObject(JSONObject obj) {
         List<String> genre = jsonArrayToList(obj.optJSONArray("genre"));
         List<String> platforms = jsonArrayToList(obj.optJSONArray("platforms"));
@@ -72,7 +78,7 @@ public class Game {
         );
     }
 
-    private static List<String> jsonArrayToList(JSONArray arr) {
+    public static List<String> jsonArrayToList(JSONArray arr) {
         if (arr == null) return null;
         return arr.toList().stream().map(Object::toString).collect(Collectors.toList());
     }
