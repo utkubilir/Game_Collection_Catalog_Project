@@ -10,7 +10,6 @@ public class JsonHandler {
 
     private static final String DEFAULT_FILE_PATH = "games.json";
 
-    // Read JSON file and convert it to a List of Maps
     // reads JSON file and return list of game maps
     public List<Map<String, Object>> readJsonFile(String filePath) {
         List<Map<String, Object>> gameList = new ArrayList<>();
@@ -37,7 +36,6 @@ public class JsonHandler {
         return gameList;
     }
 
-    // Write a List of Maps to a JSON file
     // writes list of game maps to JSON file
     public void writeJsonFile(String filePath, List<Map<String, Object>> gamesList) {
         JSONArray jsonArray = new JSONArray();
@@ -54,6 +52,16 @@ public class JsonHandler {
         }
     }
 
+    // helper method to create a game entry as a map
+    public Map<String, Object> createGame(String title, String developer, int releaseYear) {
+        Map<String, Object> game = new HashMap<>();
+        game.put("title", title);
+        game.put("developer", developer);
+        game.put("releaseYear", releaseYear);
+        return game;
+    }
+
+    // just a test
     public static void main(String[] args) {
         GameCatalog catalog = new GameCatalog();
 
