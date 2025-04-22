@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
+    
+    <!-- Üst Menü Çubuğu -->
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="New Game" onAction="#handleNewGame"/>
+                <MenuItem text="View Games" onAction="#handleViewGames"/>
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="User Manual" onAction="#handleHelp"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- Merkez: Karşılama yazısı -->
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Welcome to the Game Collection Catalog!" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Use the menu above to add, view or manage your games."/>
+        </VBox>
+    </center>
+</BorderPane>

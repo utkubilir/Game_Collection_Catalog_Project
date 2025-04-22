@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.GameListController">
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Search:"/>
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch" prefWidth="300"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="gameTable" prefHeight="400" prefWidth="600">
+            <columns>
+                <TableColumn fx:id="titleCol" text="Title" prefWidth="180"/>
+                <TableColumn fx:id="developerCol" text="Developer" prefWidth="180"/>
+                <TableColumn fx:id="releaseYearCol" text="Year" prefWidth="100"/>
+                <TableColumn fx:id="ratingCol" text="Rating" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Edit" onAction="#handleEdit"/>
+            <Button text="Delete" onAction="#handleDelete"/>
+        </HBox>
+    </bottom>
+</BorderPane>

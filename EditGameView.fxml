@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.EditGameController">
+    <content>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Edit Game Details" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="titleField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Developer:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="developerField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Release Year:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="releaseYearField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Rating:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="ratingField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Genre (comma separated):" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextArea fx:id="genreArea" prefRowCount="2" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Platforms:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextArea fx:id="platformsArea" prefRowCount="2" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Tags:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextArea fx:id="tagsArea" prefRowCount="2" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <Label text="Format:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextField fx:id="formatField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label text="Language:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextField fx:id="languageField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                <Label text="Playtime (hours):" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <TextField fx:id="playtimeField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <Label text="Image Path:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <TextField fx:id="imagePathField" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Save Changes" onAction="#handleSaveChanges"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>
