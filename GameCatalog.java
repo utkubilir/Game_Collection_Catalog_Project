@@ -4,6 +4,9 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Comparator;
+import java.util.List;
+
+import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,18 +14,21 @@ import org.json.JSONObject;
     // it filters, sort , etc.
 public class GameCatalog {
     private JSONArray games;
+    private final String filePath;
 
-    public GameCatalog() {
-        games = new JSONArray();
+    public GameCatalog(String filePath) {
+        this.filePath=filePath;
+        this.games = new JSONArray();
         loadGames();
     }
 
     //reads json file and puts them into a jsonarray
     public void loadGames() {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("games.json")));
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
             games = new JSONArray(content);
         } catch (IOException e) {
+            System.out.println("Could not load file " + filePath);
             e.printStackTrace();
         }
     }
@@ -30,7 +36,7 @@ public class GameCatalog {
     //writes the readed games to the json file
     public void saveGames() {
         try {
-            Files.write(Paths.get("games.json"), games.toString(4).getBytes());
+            Files.write(Paths.get(filePath), games.toString(4).getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,6 +93,14 @@ public class GameCatalog {
                 .map(obj -> Game.fromJSONObject(new JSONObject((Map<?, ?>) obj)))
                 .filter(game -> game.getDeveloper().equalsIgnoreCase(developer))
                 .collect(Collectors.toList());
+    }
+
+    public List<Game> searchGame(String criterion){
+        return games.toList().stream();
+        .map(obj -> Game.fromJSONObject(new JsonObject((Map<?.?>) obj)));
+        .filter(game -> game.getTitle().toLowerCase.contains(criterion.toLowerCase()));
+        .collect(Collectors.toList());
+
     }
 
     //writes selected games

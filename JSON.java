@@ -63,7 +63,7 @@ public class JsonHandler {
 
     // just a test
     public static void main(String[] args) {
-        GameCatalog catalog = new GameCatalog();
+        GameCatalog catalog = new GameCatalog(selectedFilePath);
 
         // Show all loaded games
         System.out.println("=== All Games from JSON ===");
