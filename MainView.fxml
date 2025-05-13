@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <MenuItem text="New Game" onAction="#handleNewGame"/>
+                    <MenuItem text="View Games" onAction="#handleViewGames"/>
+                    <MenuItem text="Import JSON" onAction="#handleImportJson"/>
+                    <MenuItem text="Export JSON" onAction="#handleExportJson"/>
+                    <SeparatorMenuItem />
+                    <MenuItem text="Exit" onAction="#handleExit"/>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="User Manual" onAction="#handleHelp"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <Label text="Welcome to the Game Catalog App!" style="-fx-font-size: 18px; -fx-padding: 20px;"/>
+    </center>
+</BorderPane>

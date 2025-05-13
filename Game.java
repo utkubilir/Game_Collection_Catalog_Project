@@ -18,10 +18,8 @@ public class Game {
     private List<String> tags;
     private String imagePath;
 
-    // Boş constructor (Gson için gerekli)
     public Game() {}
 
-    // Getter ve Setter'lar
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
 

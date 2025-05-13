@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.GameListController">
+    <top>
+        <VBox spacing="10">
+            <HBox spacing="10">
+                <padding><Insets top="10" right="10" bottom="0" left="10"/></padding>
+                <Label text="Search:"/>
+                <TextField fx:id="searchField" onKeyReleased="#handleSearch" prefWidth="300"/>
+            </HBox>
+            <HBox spacing="10">
+                <padding><Insets top="0" right="10" bottom="0" left="10"/></padding>
+                <Label text="Filter by tags:"/>
+                <ListView fx:id="tagListView" prefHeight="80" prefWidth="200"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding><Insets top="0" right="10" bottom="10" left="10"/></padding>
+                <Button text="Clear Filter" onAction="#handleClearTagFilter"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="10">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <TableView fx:id="gameTable" prefWidth="800">
+                <columns>
+                    <TableColumn fx:id="titleCol" text="Title" prefWidth="120"/>
+                    <TableColumn fx:id="developerCol" text="Developer" prefWidth="100"/>
+                    <TableColumn fx:id="publisherCol" text="Publisher" prefWidth="100"/>
+                    <TableColumn fx:id="releaseYearCol" text="Year" prefWidth="60"/>
+                    <TableColumn fx:id="ratingCol" text="Rating" prefWidth="60"/>
+                    <TableColumn fx:id="genreCol" text="Genre" prefWidth="100"/>
+                    <TableColumn fx:id="platformsCol" text="Platforms" prefWidth="100"/>
+                    <TableColumn fx:id="tagsCol" text="Tags" prefWidth="120"/>
+                </columns>
+            </TableView>
+            <ImageView fx:id="coverPreview" fitHeight="200" fitWidth="150" preserveRatio="true"/>
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Button text="Edit" onAction="#handleEdit"/>
+            <Button text="Delete" onAction="#handleDelete"/>
+        </HBox>
+    </bottom>
+</BorderPane>

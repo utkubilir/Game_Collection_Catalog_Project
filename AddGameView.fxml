@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AddGameController">
+    <content>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Add New Game" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="titleField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Genre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="genreArea" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Developer:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="developerField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Publisher:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="publisherField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Platforms:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="platformsArea" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Translators:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="translatorsArea" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Steam ID:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextField fx:id="steamIdField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <Label text="Release Year:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextField fx:id="releaseYearField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label text="Playtime (hours):" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextField fx:id="playtimeField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                <Label text="Format:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <TextField fx:id="formatField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <Label text="Language:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <TextField fx:id="languageField" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+                <Label text="Rating:" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                <TextField fx:id="ratingField" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+                <Label text="Tags:" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+                <TextField fx:id="tagsArea" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+
+                <Label text="Cover Image:" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
+                <HBox spacing="10" GridPane.rowIndex="13" GridPane.columnIndex="1">
+                    <TextField fx:id="imagePathField" prefWidth="250"/>
+                    <Button text="Browse" onAction="#handleBrowseImage"/>
+                </HBox>
+            </GridPane>
+
+            <ImageView fx:id="coverPreview" fitHeight="200" preserveRatio="true"/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Save" onAction="#handleSaveGame"/>
+                <Button text="Clear" onAction="#handleClear"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>
